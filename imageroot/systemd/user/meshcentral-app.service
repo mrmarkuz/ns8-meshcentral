@@ -28,7 +28,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --env REVERSE_PROXY_TLS_PORT=443 \
     --env IFRAME=false \
     --env ALLOW_NEW_ACCOUNTS=false \
-    --env WEBRTC=false \ 
+    --env WEBRTC=false \
     --env NODE_ENV=production \
     ${MESHCENTRAL_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/meshcentral-app.ctr-id -t 10

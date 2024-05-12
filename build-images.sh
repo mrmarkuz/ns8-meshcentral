@@ -45,7 +45,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/mongo:latest docker.io/typhonragewind/meshcentral:mongodb-latest" \
+    --label="org.nethserver.images=docker.io/mongo:7.0.9 docker.io/typhonragewind/meshcentral:preloadlibs-mongodb-1.1.22" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
