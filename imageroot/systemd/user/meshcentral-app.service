@@ -24,13 +24,19 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --volume meshcentral-data:/opt/meshcentral/meshcentral-data:Z \
     --volume meshcentral-files:/opt/meshcentral/meshcentral-files:Z \
     --env HOSTNAME=${TRAEFIK_HOST} \
-    --env REVERSE_PROXY=127.0.0.1 \
+    --env REVERSE_PROXY=${TRAEFIK_HOST} \
     --env REVERSE_PROXY_TLS_PORT=443 \
     --env IFRAME=false \
     --env ALLOW_NEW_ACCOUNTS=false \
     --env WEBRTC=false \
     --env NODE_ENV=production \
     ${MESHCENTRAL_IMAGE}
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"cert\": \"meshcentral\"/\"cert\": \"${TRAEFIK_HOST}\"/" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"port\": 443/\"port\": 8989/" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"_aliasPort\": 443/\"aliasPort\": 443/" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"redirPort\": 80/\"redirPort\": 0/" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"TLSOffload\": false/\"TLSOffload\": \"127.0.0.1\"/" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"mongodb\": \"mongodb://mongodb:27017/mesh\";\"mongodb\": \"mongodb://mongo-app:27017/mesh\";" meshcentral-data/config.json
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/meshcentral-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP meshcentral-app
 SyslogIdentifier=%u

@@ -10,13 +10,11 @@ exec 1>&2 # Redirect any output to the journal (stderr)
 
 # Prepare an initialization script that restores the dump file
 mkdir -vp initdb.d
-mv -v meshcentral.sql initdb.d
+mv -v meshcentral.dump initdb.d
 #do the bash file to restore and exit once done
 cat - >initdb.d/zz_meshcentral_restore.sh <<'EOS'
-# Print additional information:
-mysql --version
-# The script is sourced, override entrypoint args and exit:
-set -- true
+mongo --eval 'db.dropDatabase();' meshcentral
+mongorestore meshcentral.dump
 docker_temp_server_stop
 exit 0
 EOS
@@ -31,11 +29,7 @@ podman run \
   --rm \
   --interactive \
   --network=none \
-  --volume=./initdb.d:/docker-entrypoint-initdb.d:z \
-  --volume mysql-data:/var/lib/mysql/:Z \
-  --env MARIADB_ROOT_PASSWORD=Nethesis,1234 \
-  --env MARIADB_DATABASE=meshcentral \
-  --env MARIADB_USER=meshcentral \
-  --env MARIADB_PASSWORD=meshcentral \
+  --volume ./initdb.d:/docker-entrypoint-initdb.d:z \
+  --volume mongo-app:/data/db:Z \
   --replace --name=restore_db \
-  ${MARIADB_IMAGE}
+  ${MONGO_IMAGE}

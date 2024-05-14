@@ -1,19 +1,19 @@
 {
-  "name": "meshcentral",
+  "name": "MeshCentral",
   "description": {
-    "en": "My meshcentral module"
+    "en": "Full computer management web site"
   },
-  "categories": [],
+  "categories": ["collaboration"],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Markus Neuberger",
+      "email": "dev@markusneuberger.at"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.meshcentral.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-meshcentral"
+    "documentation_url": "https://ylianst.github.io/MeshCentral",
+    "bug_url": "https://community.nethserver.org",
+    "code_url": "https://github.com/mrmarkuz/ns8-meshcentral"
   },
-  "source": "ghcr.io/nethserver/meshcentral"
+  "source": "ghcr.io/mrmarkuz/meshcentral"
 }
