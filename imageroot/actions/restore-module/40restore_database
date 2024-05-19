@@ -13,7 +13,7 @@ mkdir -vp initdb.d
 mv -v meshcentral.dump initdb.d
 #do the bash file to restore and exit once done
 cat - >initdb.d/zz_meshcentral_restore.sh <<'EOS'
-mongo --eval 'db.dropDatabase();' meshcentral
+mongosh --eval 'db.dropDatabase();' meshcentral
 mongorestore meshcentral.dump
 docker_temp_server_stop
 exit 0
