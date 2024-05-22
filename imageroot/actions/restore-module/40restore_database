@@ -14,7 +14,7 @@ mv -v meshcentral.dump initdb.d
 #do the bash file to restore and exit once done
 cat - >initdb.d/zz_meshcentral_restore.sh <<'EOS'
 mongosh --eval 'db.dropDatabase();' meshcentral
-mongorestore --archive=/docker-entrypoint-initdb.d/meshcentral.dump
+mongorestore --archive < /docker-entrypoint-initdb.d/meshcentral.dump
 docker_temp_server_stop
 exit 0
 EOS
