@@ -11,4 +11,4 @@ if ! systemctl --user -q is-active meshcentral.service; then
     exit 0
 fi
 
-podman exec mongo-app mongodump > meshcentral.dump
+podman exec mongo-app mongodump > meshcentral.bson
