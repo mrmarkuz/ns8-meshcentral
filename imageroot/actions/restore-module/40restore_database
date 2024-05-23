@@ -10,11 +10,11 @@ exec 1>&2 # Redirect any output to the journal (stderr)
 
 # Prepare an initialization script that restores the dump file
 mkdir -vp initdb.d
-mv -v meshcentral.dump initdb.d
+mv -v meshcentral.archive initdb.d
 #do the bash file to restore and exit once done
 cat - >initdb.d/zz_meshcentral_restore.sh <<'EOS'
 mongosh --eval 'db.dropDatabase();' meshcentral
-mongorestore --archive < /docker-entrypoint-initdb.d/meshcentral.dump
+mongorestore --archive=/docker-entrypoint-initdb.d/meshcentral.archive
 docker_temp_server_stop
 exit 0
 EOS
