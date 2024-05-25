@@ -23,6 +23,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --env-file=%S/state/environment \
     --volume meshcentral-data:/opt/meshcentral/meshcentral-data:Z \
     --volume meshcentral-files:/opt/meshcentral/meshcentral-files:Z \
+    --volume meshcentral-backups:/opt/meshcentral/meshcentral-backups:Z \
+    --volume mongo-app:/data/db:Z \
+    --volume mongo-configdb:/data/configdb:Z \
     --env HOSTNAME=${TRAEFIK_HOST} \
     --env REVERSE_PROXY=${TRAEFIK_HOST} \
     --env REVERSE_PROXY_TLS_PORT=443 \

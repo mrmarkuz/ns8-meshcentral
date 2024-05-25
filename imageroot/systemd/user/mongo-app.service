@@ -18,6 +18,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mongo-app.pid \
     --cidfile %t/mongo-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/meshcentral.pod-id --replace -d --name mongo-app \
     --volume mongo-app:/data/db:Z \
+    --volume mongo-configdb:/data/configdb:Z \
     ${MONGO_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/mongo-app.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/mongo-app.ctr-id
