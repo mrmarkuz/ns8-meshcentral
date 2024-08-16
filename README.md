@@ -1,6 +1,6 @@
 # ns8-meshcentral
 
-
+MeshCentral is a full computer management web site.
 
 ## Install
 
@@ -25,6 +25,10 @@ The FQDN needs to be configured in the Web UI app settings. A valid certificate 
 ## First login
 
 At the login page you can create an account. The created user is the admin user. After creating the admin user it's not possible to create another user at the login page.
+
+## Mongo on Proxmox
+
+To make mongodb work, the CPU needs to be set to "host" in the Proxmox VM hardware. I found it in the [Proxmox Forum](https://forum.proxmox.com/threads/enable-avx.129019/)
 
 ## Uninstall
 
