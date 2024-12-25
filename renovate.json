@@ -7,9 +7,8 @@
     "**/ui/**",
     "**/.devcontainer/**"
   ],
-  "customManagers": [
+  "regexManagers": [
     {
-      "customType": "regex",
       "fileMatch": [
         "build-images.sh"
       ],
@@ -18,6 +17,16 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "typhonragewind/meshcentral"
+    }
+    {
+      "fileMatch": [
+        "build-images.sh"
+      ],
+      "matchStrings": [
+        "docker\\.io/mongo:(?<currentValue>[-0-9\\.a-z]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "mongo"
     }
   ]
 }
