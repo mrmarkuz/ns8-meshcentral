@@ -17,7 +17,7 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "typhonragewind/meshcentral"
-    }
+    },
     {
       "fileMatch": [
         "build-images.sh"
