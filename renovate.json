@@ -14,7 +14,7 @@
         "build-images.sh"
       ],
       "matchStrings": [
-        "docker\\.io/typhonragewind/meshcentral:preloadlibs-mongodb-:(?<currentValue>[-0-9\\.a-z]+)"
+        "docker\\.io/typhonragewind/meshcentral:preloadlibs-mongodb-(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "typhonragewind/meshcentral"
