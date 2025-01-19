@@ -7,8 +7,9 @@
     "**/ui/**",
     "**/.devcontainer/**"
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "build-images.sh"
       ],
@@ -19,6 +20,7 @@
       "depNameTemplate": "typhonragewind/meshcentral"
     },
     {
+      "customType": "regex",
       "fileMatch": [
         "build-images.sh"
       ],
