@@ -1,6 +1,7 @@
 # ns8-meshcentral
 
-MeshCentral is a full computer management web site.
+[MeshCentral](https://meshcentral.com/) is a full computer management web site. \
+Documentation: https://ylianst.github.io/MeshCentral/meshcentral/
 
 ## Install
 
