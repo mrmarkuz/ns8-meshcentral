@@ -40,6 +40,7 @@ ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"_aliasPort\": 443
 ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"redirPort\": 80/\"redirPort\": 0/" meshcentral-data/config.json
 ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s/\"TLSOffload\": false/\"TLSOffload\": \"127.0.0.1\"/" meshcentral-data/config.json
 ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"mongodb\": \"mongodb://mongodb:27017/mesh\";\"mongodb\": \"mongodb://mongo-app:27017/mesh\";" meshcentral-data/config.json
+ExecStop=/usr/bin/podman exec meshcentral-light-app rm meshcentral-data/config.json
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/meshcentral-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP meshcentral-app
 SyslogIdentifier=%u
