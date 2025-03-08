@@ -8,7 +8,6 @@ Documentation: https://ylianst.github.io/MeshCentral/meshcentral/
 Install via Software center:
 
   - Add a Software repository pointing to `https://repo.mrmarkuz.com/ns8/updates/`, check out the [repo webpage](https://repo.mrmarkuz.com) how to do it.
-  - Install Guacamole via Software Center
 
 Instantiate the module on CLI with:
 
