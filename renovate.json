@@ -10,8 +10,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "build-images.sh"
+      "managerFilePatterns": [
+        "/build-images.sh/"
       ],
       "matchStrings": [
         "docker\\.io/typhonragewind/meshcentral:preloadlibs-mongodb-(?<currentValue>[-0-9\\.a-z]+)"
@@ -21,8 +21,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "build-images.sh"
+      "managerFilePatterns": [
+        "/build-images.sh/"
       ],
       "matchStrings": [
         "docker\\.io/mongo:(?<currentValue>[-0-9\\.a-z]+)"
