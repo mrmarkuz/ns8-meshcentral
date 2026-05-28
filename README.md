@@ -20,7 +20,7 @@ Output example:
 
 ## Configure
 
-The FQDN needs to be configured in the Web UI app settings. A valid certificate is recommended.
+The FQDN needs to be configured in the Web UI app settings. Please take care to set the right FQDN as it's not possible to easily change it afterwards. A valid certificate is recommended.
 
 ## First login
 
