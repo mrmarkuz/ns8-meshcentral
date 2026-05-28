@@ -29,13 +29,20 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --volume mongo-configdb:/data/configdb:Z \
     ${MESHCENTRAL_IMAGE}
 # Change port to 443 in case of update from old image
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"port\": 8989|\"port\": 443|" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"cert\": \"myserver.mydomain.com\"|\"cert\": \"${TRAEFIK_HOST}\"|" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"tlsOffload\": false|\"tlsOffload\": true|" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_mongoDb\": \"\";\"mongoDb\": \"mongodb://mongo-app:27017/mesh\";" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_certUrl\": \"my.reverse.proxy\";\"certUrl\": \"${TRAEFIK_HOST}\";" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"allowedOrigin\": false;\"allowedOrigin\": true;" meshcentral-data/config.json
-ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"NewAccounts\": true;\"newAccounts\": false;" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i -e "s|\"port\": 8989|\"port\": 443|"  \
+-e "s|\"cert\": \"myserver.mydomain.com\"|\"cert\": \"${TRAEFIK_HOST}\"|" \
+-e "s|\"tlsOffload\": false|\"tlsOffload\": true|" \
+-e "s;\"_mongoDb\": \"\";\"mongoDb\": \"mongodb://mongo-app:27017/mesh\";" \
+-e "s;\"_certUrl\": \"my.reverse.proxy\";\"certUrl\": \"${TRAEFIK_HOST}\";" \
+-e "s;\"allowedOrigin\": false;\"allowedOrigin\": true;" \
+-e "s;\"NewAccounts\": true;\"newAccounts\": false;" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"port\": 8989|\"port\": 443|" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"cert\": \"myserver.mydomain.com\"|\"cert\": \"${TRAEFIK_HOST}\"|" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"tlsOffload\": false|\"tlsOffload\": true|" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_mongoDb\": \"\";\"mongoDb\": \"mongodb://mongo-app:27017/mesh\";" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_certUrl\": \"my.reverse.proxy\";\"certUrl\": \"${TRAEFIK_HOST}\";" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"allowedOrigin\": false;\"allowedOrigin\": true;" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"NewAccounts\": true;\"newAccounts\": false;" meshcentral-data/config.json
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/meshcentral-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP meshcentral-app
 SyslogIdentifier=%u
