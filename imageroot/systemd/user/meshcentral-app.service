@@ -27,16 +27,22 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --volume meshcentral-backups:/opt/meshcentral/meshcentral-backups:Z \
     --volume mongo-app:/data/db:Z \
     --volume mongo-configdb:/data/configdb:Z \
-    --env HOSTNAME=${TRAEFIK_HOST} \
-    --env REVERSE_PROXY=${TRAEFIK_HOST} \
-    --env ALLOWED_ORIGIN=true \
-    --env TLS_OFFLOAD=true \
-    --env USE_MONGODB=true \
-    --env MONGO_URL=mongodb://mongo-app:27017/mesh \
-    --env TRUSTED_PROXY=127.0.0.1 \
+#    --env HOSTNAME=${TRAEFIK_HOST} \
+#    --env REVERSE_PROXY=${TRAEFIK_HOST} \
+#    --env ALLOWED_ORIGIN=true \
+#    --env TLS_OFFLOAD=true \
+#    --env USE_MONGODB=true \
+#    --env MONGO_URL=mongodb://mongo-app:27017/mesh \
+#    --env TRUSTED_PROXY=127.0.0.1 \
     ${MESHCENTRAL_IMAGE}
-# Change port to 443
+# Change port to 443 in case of update
 ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"port\": 8989|\"port\": 443|" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"cert\": \"myserver.mydomain.com\"|\"cert\": \"${TRAEFIK_HOST}\"|" meshcentral-data/config.json
+#ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"redirPort\": 80|\"redirPort\": 0|" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s|\"tlsOffload\": false|\"tlsOffload\": \"127.0.0.1\"|" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_mongodb\": \"\";\"mongodb\": \"mongodb://mongo-app:27017/mesh\";" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"_certUrl\": \"my.reverse.proxy\";\"certUrl\": \"${TRAEFIK_HOST}\";" meshcentral-data/config.json
+ExecStartPost=/usr/bin/podman exec meshcentral-app sed -i "s;\"allowedOrigin\": false;\"allowedOrigin\": true;" meshcentral-data/config.json
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/meshcentral-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP meshcentral-app
 SyslogIdentifier=%u
