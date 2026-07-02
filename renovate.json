@@ -13,11 +13,11 @@
       "managerFilePatterns": [
         "/build-images.sh/"
       ],
-      "matchStrings": [
-        "docker\\.io/typhonragewind/meshcentral:preloadlibs-mongodb-(?<currentValue>[-0-9\\.a-z]+)"
+      "matchStrings": [        
+        "ghcr\\.io/ylianst/meshcentral:(?<currentValue>[-0-9\\.a-z]+)-mongodb"
       ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "typhonragewind/meshcentral"
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "ylianst/meshcentral"
     },
     {
       "customType": "regex",
