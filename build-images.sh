@@ -46,7 +46,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
 	--label="org.nethserver.min-core=3.12.4-0" \
-    --label="org.nethserver.images=docker.io/mongo:7.0.39 ghcr.io/ylianst/meshcentral:1.2.4-mongodb" \
+    --label="org.nethserver.images=docker.io/mongo:8.3.9 ghcr.io/ylianst/meshcentral:1.2.4-mongodb" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
