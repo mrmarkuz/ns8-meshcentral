@@ -1,9 +1,13 @@
 {
   "name": "MeshCentral",
   "description": {
-    "en": "Full computer management web site"
+    "en": "MeshCentral is a free, open-source, self-hosted web-based remote computer management and monitoring platform",
+    "de": "MeshCentral ist eine kostenlose, quelloffene, selbst gehostete und webbasierte Plattform zur Fernverwaltung und Überwachung von Computern",
+    "fr": "MeshCentral est une plateforme web gratuite, open source et auto-hébergée, destinée à la gestion et à la surveillance d'ordinateurs à distance",
+    "it": "MeshCentral è una piattaforma web gratuita, open source e autospostata per la gestione e il monitoraggio remoto di computer",
+    "es": "MeshCentral es una plataforma web gratuita, de código abierto y autohospedada para la gestión y supervisión remota de equipos informáticos"
   },
-  "categories": ["collaboration"],
+  "categories": ["system_administration"],
   "authors": [
     {
       "name": "Markus Neuberger",
