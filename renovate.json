@@ -1,34 +1,18 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "ignorePaths": [
-    "**/ui/**",
-    "**/.devcontainer/**"
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/build-images.sh/"
-      ],
-      "matchStrings": [        
-        "ghcr\\.io/ylianst/meshcentral:(?<currentValue>[-0-9\\.a-z]+)-mongodb"
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "ylianst/meshcentral"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/build-images.sh/"
-      ],
-      "matchStrings": [
-        "docker\\.io/mongo:(?<currentValue>[-0-9\\.a-z]+)"
-      ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "mongo"
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "local>NethServer/.github:ns8-automerge"
+    ],
+    "packageRules": [
+        {
+            "matchDatasources": ["github-release"],
+            "matchPackageNames": ["ylianst/meshcentral"],
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-mongodb$"
+        },
+        {
+            "matchDatasources": ["docker"],
+            "matchPackageNames": ["mongo"],
+            "allowedVersions": "7.0.*"
+        }
+    ]
 }
