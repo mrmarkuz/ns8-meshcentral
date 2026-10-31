@@ -10,9 +10,9 @@ After=meshcentral.service mongo-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=%S/state/environment
-EnvironmentFile=-%S/state/smarthost.env
-WorkingDirectory=%S/state
+EnvironmentFile=%E/state/environment
+EnvironmentFile=-%E/state/smarthost.env
+WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/meshcentral-app.pid %t/meshcentral-app.ctr-id
@@ -20,7 +20,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/meshcentral-app.pid \
     --cidfile %t/meshcentral-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/meshcentral.pod-id --replace -d --name  meshcentral-app \
-    --env-file=%S/state/environment \
+    --env-file=%E/state/environment \
     --volume meshcentral-data:/opt/meshcentral/meshcentral-data:Z \
     --volume meshcentral-files:/opt/meshcentral/meshcentral-files:Z \
     --volume meshcentral-web:/opt/meshcentral/meshcentral-web:Z \
