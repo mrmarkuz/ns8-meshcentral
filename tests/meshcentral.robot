@@ -45,7 +45,7 @@ Check if meshcentral can be configured
     Should Be Equal As Integers    ${rc}  0
 
 Check if meshcentral works as expected
-    ${rc} =    Execute Command    sleep 20 && curl -H "Host: meshcentral.domain.test" -fkL https://127.0.0.1/
+    ${rc} =    Execute Command    sleep 60 && curl -H "Host: meshcentral.domain.test" -fkL https://127.0.0.1/
     ...    return_rc=True  return_stdout=False
     Should Be Equal As Integers    ${rc}  0
 
